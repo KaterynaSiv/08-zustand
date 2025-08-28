@@ -15,16 +15,25 @@ export default function NoteForm() {
 
   const { draft, setDraft, clearDraft } = useNoteDraft();
 
-  const mutation = useMutation({
+  // const mutation = useMutation({
+  //   mutationFn: createNote,
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries({ queryKey: ["notes"] });
+  //     clearDraft();
+  //     router.push("/notes");
+  //   },
+  // });
+
+  const { mutate, isPending } = useMutation({
     mutationFn: createNote,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["notes"] });
       clearDraft();
-      router.push("/notes");
+      router.back();
     },
   });
 
-  const handleChange = (
+  const handleCancel = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
     setDraft({
@@ -35,7 +44,7 @@ export default function NoteForm() {
 
   const handleSubmit = (formData: FormData) => {
     const values = Object.fromEntries(formData) as NewNoteValues;
-    mutation.mutate(values);
+    mutate(values);
   };
 
   return (
@@ -46,7 +55,7 @@ export default function NoteForm() {
           id="title"
           type="text"
           name="title"
-          onChange={handleChange}
+          onChange={handleCancel}
           defaultValue={draft.title}
           required
           minLength={3}
@@ -61,7 +70,7 @@ export default function NoteForm() {
           id="content"
           name="content"
           rows={8}
-          onChange={handleChange}
+          onChange={handleCancel}
           defaultValue={draft.content}
           maxLength={500}
           className={css.textarea}
@@ -73,7 +82,7 @@ export default function NoteForm() {
         <select
           id="tag"
           name="tag"
-          onChange={handleChange}
+          onChange={handleCancel}
           defaultValue={draft.tag}
           className={css.select}
         >
@@ -87,14 +96,14 @@ export default function NoteForm() {
 
       <div className={css.actions}>
         <button
-          type="submit"
+          type="button"
           className={css.cancelButton}
           onClick={() => router.back()}
         >
           Cancel
         </button>
         <button type="submit" className={css.submitButton} disabled={false}>
-          {mutation.isPending ? "Creating..." : "Create note"}
+          {isPending ? "Creating..." : "Create note"}
         </button>
       </div>
     </form>
