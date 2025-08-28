@@ -33,7 +33,7 @@ export default function NoteForm() {
     },
   });
 
-  const handleCancel = (
+  const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
     setDraft({
@@ -55,7 +55,7 @@ export default function NoteForm() {
           id="title"
           type="text"
           name="title"
-          onChange={handleCancel}
+          onChange={handleChange}
           defaultValue={draft.title}
           required
           minLength={3}
@@ -70,7 +70,7 @@ export default function NoteForm() {
           id="content"
           name="content"
           rows={8}
-          onChange={handleCancel}
+          onChange={handleChange}
           defaultValue={draft.content}
           maxLength={500}
           className={css.textarea}
@@ -82,7 +82,7 @@ export default function NoteForm() {
         <select
           id="tag"
           name="tag"
-          onChange={handleCancel}
+          onChange={handleChange}
           defaultValue={draft.tag}
           className={css.select}
         >

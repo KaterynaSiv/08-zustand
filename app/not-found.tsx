@@ -4,11 +4,11 @@ import css from "./page.module.css";
 export const metadata: Metadata = {
   title: "NoteHub app - Page Not Found",
   description:
-    "The page you are looking for does not found ot not exist. Please check url and explore NoteHub app to organize your thoughts.",
+    "The page you are looking for does not exist or was not found. Please check url and explore NoteHub app to organize your thoughts.",
   openGraph: {
     title: "NoteHub app - Page Not Found",
     description:
-      "The page you are looking for does not found ot not exist. Please check url and explore NoteHub app to organize your thoughts.",
+      "The page you are looking for does not exist or was not found. Please check url and explore NoteHub app to organize your thoughts.",
     url: "https://notehub.com/not-found",
     siteName: "NoteHub",
     images: [
