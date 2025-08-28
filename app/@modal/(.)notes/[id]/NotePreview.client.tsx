@@ -36,7 +36,7 @@ export default function NoteDetailsClient() {
           <div className={css.header}>
             <h2 className={`${css.header} ${css.h2}`}>{note.title}</h2>
           </div>
-          <p className={css.tag}>Category: {note.tag}</p>
+          <p className={css.tag}>{note.tag}</p>
           <p className={css.content}>{note.content}</p>
           <button className={css.backBtn} onClick={handleClickBack}>
             Exit

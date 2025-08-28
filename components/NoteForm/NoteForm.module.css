@@ -21,6 +21,23 @@
   border: 1px solid #ced4da;
   border-radius: 4px;
   resize: none;
+  transition: border-color 0.2s ease;
+}
+
+.input:hover,
+.textarea:hover,
+.select:hover {
+  border-color: #ced4da;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  outline: none;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+  border-color: #ced4da;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  outline: none;
 }
 
 .actions {

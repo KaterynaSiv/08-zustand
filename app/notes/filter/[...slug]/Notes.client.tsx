@@ -10,12 +10,11 @@ import { useState, useEffect } from "react";
 import SearchBox from "@/components/SearchBox/SearchBox";
 import NoteList from "@/components/NoteList/NoteList";
 import Pagination from "@/components/Pagination/Pagination";
-import Modal from "@/components/Modal/Modal";
-import NoteForm from "@/components/NoteForm/NoteForm";
 
 import { MoonLoader } from "react-spinners";
 import { Toaster, toast } from "react-hot-toast";
 import { NoteTag } from "@/types/note";
+import Link from "next/link";
 
 interface NotesClientProps {
   initialData: FetchNotesResponse;
@@ -24,7 +23,6 @@ interface NotesClientProps {
 
 export default function NotesClient({ initialData, tag }: NotesClientProps) {
   const [searchText, setSearchText] = useState<string>("");
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const [debouncedSearchText] = useDebounce(searchText, 300);
@@ -52,10 +50,6 @@ export default function NotesClient({ initialData, tag }: NotesClientProps) {
     }
   }, [isError]);
 
-  const toggleModal = () => {
-    setModalOpen(!modalOpen);
-  };
-
   const notes = data?.notes ?? [];
   const totalPages = data?.totalPages ?? 0;
 
@@ -72,9 +66,9 @@ export default function NotesClient({ initialData, tag }: NotesClientProps) {
           />
         )}
 
-        <button className={css.button} onClick={toggleModal}>
+        <Link href="/notes/action/create" className={css.button}>
           Create note +
-        </button>
+        </Link>
       </header>
 
       {isLoading ? (
@@ -85,12 +79,6 @@ export default function NotesClient({ initialData, tag }: NotesClientProps) {
         <NoteList notes={notes} />
       ) : (
         <p>No notes found</p>
-      )}
-
-      {modalOpen && (
-        <Modal onClose={toggleModal}>
-          <NoteForm onClose={toggleModal} />
-        </Modal>
       )}
 
       <Toaster />
